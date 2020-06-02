@@ -1,0 +1,95 @@
+﻿@using MaasVallei.Helpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MaasVallei</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/d9cad782c3.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="~/images/logo-camping.png" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="~/css/panel.css" />
+</head>
+<body>
+
+
+    <main>
+        <div class="wrapper">
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                <a class="navbar-brand" href="#">
+                    <img src="~/images/logo-camping-png-4.png" class="logo" width="80" height="80" alt="">
+                </a>
+                    <h4>De Maasvallei</h4>
+                </div>
+                <ul class="list-unstyled components">
+                    <p class="user">Logged in as <b>@User.Identity.Name</b></p>
+                    <li class="@Html.IsSelected(controllers: "Home", actions:"Panel")">
+                        <a asp-controller="Home" asp-action="Panel">Home</a>
+                    </li>
+                    @if (User.IsInRole("ADMIN") || User.IsInRole("USER"))
+                    {
+                        <li class="@Html.IsSelected(controllers: "Reservation", actions:"Reserve")">
+                            <a asp-controller="Reservation" asp-action="Reserve">Reserveren</a>
+                        </li>
+                    }
+                    <li class="@Html.IsSelected(controllers: "Complaints", actions:"Complainments")">
+                        <a asp-controller="Complaints" asp-action="Complainments">Klachten</a>
+                    </li>
+                    @if (User.IsInRole("ADMIN") || User.IsInRole("TECHNISCH") || User.IsInRole("SCHOONMAAK"))
+                    {
+                        <li class="@Html.IsSelected(controllers: "Rooster", actions:"Roosters")">
+                            <a asp-controller="Rooster" asp-action="Roosters">Rooster</a>
+                        </li>
+
+                    }
+                    <li>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            @* <li> *@
+                            @*     <a href="#">Account</a> *@
+                            @* </li> *@
+                            <li>
+                                <a asp-controller="Account" asp-action="Logout">Uitloggen</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <p class="sidebar-footer-text" style="text-align: center;">&copyMaasvallei | 2020 </p>
+            </nav>
+
+            <div id="content">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+
+                        <button type="button" id="sidebarCollapse" class="btn btn-info">
+                            <i class="fas fa-align-left"></i>
+                        </button>
+
+                    </div>
+                </nav>
+                @if (TempData["message"] != null)
+                    {
+                        <div class="container-fluid">
+                            @{
+                                var message = (AlertMessage)TempData["message"];
+                            }
+                            <div class="alert @message.CssClass">
+                                @message.Message
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    @RenderBody()
+            </div>
+        </div>
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

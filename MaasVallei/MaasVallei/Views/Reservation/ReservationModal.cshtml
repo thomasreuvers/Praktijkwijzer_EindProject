@@ -1,0 +1,71 @@
+﻿@using MaasVallei.Models
+@model ReservationModel
+<!-- The Modal -->
+<div class="modal" id="createUpdateReservation">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <form method="post" asp-controller="Reservation" asp-action="Reserve">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title reservationEdit">Reserveer</h4>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+               <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               <input type="hidden" asp-for="FormOption"/>
+               <input type="hidden" asp-for="ReservationId"/>
+               <div class="form-group">
+                  <label asp-for="EmailAddress" class="control-label"></label>
+                  <input asp-for="EmailAddress" class="form-control" />
+                  <span asp-validation-for="EmailAddress" class="text-danger"></span>
+               </div>
+               <div class="form-group">
+                  <label asp-for="PhoneNumber" class="control-label"></label>
+                  <input asp-for="PhoneNumber" class="form-control" />
+                  <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+               </div>
+               <div class="form-group">
+                  <label asp-for="ArriveDate" class="control-label"></label>
+                  <input asp-for="ArriveDate" class="form-control" />
+                  <span asp-validation-for="ArriveDate" class="text-danger"></span>
+               </div>
+               <div class="form-group">
+                  <label asp-for="DepartureDate" class="control-label"></label>
+                  <input asp-for="DepartureDate" class="form-control" />
+                  <span asp-validation-for="DepartureDate" class="text-danger"></span>
+               </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+               <input type="submit" value="Reserveer" class="btn btn-default btn-primary reservationBtn" />
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="deleteReservation">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <form method="post" asp-controller="Reservation" asp-action="Reserve">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title">Verwijderen</h4>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+               Weet je zeker dat je deze reservering wilt verwijderen?
+               <input asp-for="FormOption" type="hidden" value="DELETE"/>
+               <input asp-for="ReservationId" type="hidden" id="deleteReservationId"/>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+               <input type="submit" value="Verwijder" class="btn btn-danger btn-primary" />
+            </div>
+         </form>
+      </div>
+   </div>
+</div>

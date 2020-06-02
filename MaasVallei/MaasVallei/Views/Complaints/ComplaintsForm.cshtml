@@ -1,0 +1,93 @@
+﻿@using MaasVallei.Models
+@model ComplaintsModel
+@if (User.IsInRole("USER"))
+{
+    <div class="col-12">
+        <form asp-controller="Complaints" asp-action="Complainments">
+            <h2>Dien een klacht in.</h2>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-Description-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Department" class="control-label"></label>
+                <select asp-for="Department" asp-items="Html.GetEnumSelectList<Departments>()" class="form-control"></select>
+                <span asp-validation-for="Department" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Priority" class="control-label"></label>
+                <select asp-for="Priority" asp-items="Html.GetEnumSelectList<Priority>()" class="form-control"></select>
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Indienen" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <!-- The Modal -->
+    <div class="modal" id="updateComplaintState">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" asp-controller="Complaints" asp-action="Complainments">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Afhandelen</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        Weet u zeker dat u deze klacht wilt afhandelen?
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                        <input type="hidden" asp-for="FormOption" />
+                        <input type="hidden" asp-for="Id" />
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <input type="submit" value="Afhandelen" class="btn btn-default btn-success reservationBtn" />
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+}
+
+<!-- The Modal -->
+<div class="modal" id="viewComplaint">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title complaintTitle "></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body description">
+                    
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+        </div>
+    </div>
+</div>

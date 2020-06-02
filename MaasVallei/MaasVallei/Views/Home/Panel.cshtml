@@ -1,0 +1,85 @@
+﻿@using MaasVallei.Models
+@model PanelModel
+@{
+    ViewData["Title"] = "Panel";
+    Layout = "_PanelLayout";
+
+    var complaintCount = 0;
+
+
+    if (Model.Complaints.Any())
+    {
+        if (User.IsInRole("TECHNISCH"))
+        {
+            complaintCount = Model.Complaints.Where(x => x.State == "In Behandeling").Count(x => x.Department == Departments.Technisch);
+        }else if (User.IsInRole("SCHOONMAAK"))
+        {
+            complaintCount = Model.Complaints.Where(x => x.State == "In Behandeling").Count(x => x.Department == Departments.Schoonmaak);
+        }
+    }
+
+}
+
+<div class="container-fluid main">
+
+        @if (User.IsInRole("ADMIN"))
+        {
+
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container text-center">
+                        <h3 class="display-4">Hallo</h3>
+                        <p class="lead">Welkom op het Admin Panel</p>
+                    </div>
+                </div>
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container text-center">
+                        <h3 class="display-4">Reserveringen</h3>
+                        <p class="lead display-4">@Model.Reservations <i class="fas fa-users"></i></p>
+                        <a asp-controller="reservation" asp-action="reserve" class="button">Naar reserveringen</a>
+                    </div>
+                </div>
+               
+        }
+        else if(User.IsInRole("USER"))
+        {
+
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        @if (Model?.CurrentUserReservationModel != null)
+                        {
+                            if (Model.CurrentUserReservationModel.ArriveDate > DateTime.UtcNow)
+                            {
+                                <h1 class="display-4">Aankomend verblijf.</h1>
+                                <p class="lead">Pak de tassen maar in! U verblijf bij Camping de Maasvallei start vanaf <b>@Model.CurrentUserReservationModel.ArriveDate.ToLocalTime().ToString("MM/dd/yyyy, HH:mm tt")</b>.</p>
+                            }
+                            else if (Model.CurrentUserReservationModel.ArriveDate < DateTime.UtcNow && Model.CurrentUserReservationModel.DepartureDate > DateTime.UtcNow)
+                            {
+                                <h1 class="display-4">Momenteel verblijvend.</h1>
+                                <p class="lead">U verblijft momenteel op onze camping. Geniet van uw verblijf!</p>
+                            }
+                            else if (Model.CurrentUserReservationModel.ArriveDate < DateTime.UtcNow && Model.CurrentUserReservationModel.DepartureDate < DateTime.UtcNow)
+                            {
+                                <h1 class="display-4">Geen verblijf.</h1>
+                                <p class="lead">U verblijft momenteel niet op Camping de Maasvallei.</p>
+                            }
+
+                        }
+                        else
+                        {
+                            <h1 class="display-4">Geen verblijf.</h1>
+                            <p class="lead">U verblijft momenteel niet op Camping de Maasvallei.</p>
+                        }
+
+                    </div>
+                </div>
+
+        }else if (User.IsInRole("TECHNISCH") || User.IsInRole("SCHOONMAAK"))
+        {
+            <div class="jumbotron jumbotron-fluid">
+                    <div class="container text-center">
+                        <h3 class="display-4">Klachten:</h3>
+                        <p class="lead display-4">@complaintCount <i class="fas fa-exclamation"></i></p>
+                    </div>
+                </div>
+        }
+</div>

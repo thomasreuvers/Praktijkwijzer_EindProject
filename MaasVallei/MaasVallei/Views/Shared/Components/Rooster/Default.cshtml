@@ -1,0 +1,38 @@
+﻿@using MaasVallei.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model RoosterModel
+
+@if (User.IsInRole("ADMIN"))
+{
+    <div class="container main">
+        <div class="col-12">
+            <form asp-controller="Rooster" asp-action="Roosters">
+                <h2>Plan een werknemer in.</h2>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="SelectedUser" class="control-label"></label>
+                    <select asp-for="SelectedUser" asp-items="Model.AllUsers" class="form-control"></select>
+                    <span asp-validation-for="SelectedUser" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartShift" class="control-label"></label>
+                    <input asp-for="StartShift" class="form-control" />
+                    <span asp-Description-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndShift" class="control-label"></label>
+                    <input asp-for="EndShift" class="form-control" />
+                    <span asp-validation-for="EndShift" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RoosterDate" class="control-label"></label>
+                    <input asp-for="RoosterDate" class="form-control" />
+                    <span asp-validation-for="RoosterDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Aanmaken" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}

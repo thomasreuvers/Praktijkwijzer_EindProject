@@ -1,0 +1,233 @@
+﻿body {
+  color: white;
+}
+
+/* Scroll behavior smooth, zorgt voor smooth scrolling door de hele website (good voor mobile devices) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #456961; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #21332f; 
+}
+
+::-moz-selection {
+  background: #60998c;
+  color: white;
+}
+
+::selection {
+  background: #60998c;
+  color: white;
+}
+
+/* Background Image Styling Home Pagina (index) */
+.bg {
+  background-image: url("../images/MountainBackground.jpg");
+
+  /* Full height */
+  min-height: 100vh;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Background Image Styling Login en Reserveren Pagina */
+.bg-login {
+  background-image: url("../images/WebsitePraktijkWijzerLogin.png");
+
+  /* Full height */
+  min-height: 100vh;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Shadow Styling */
+.shadow-box {
+  margin-top: 6rem;
+  background: rgba(0, 0, 0, 0.67);
+  padding: 30px;
+  border-radius: 3px;
+}
+
+.shadow-box-logo {
+  background: rgba(0, 0, 0, 0.67);
+  padding: 13px;
+  border-radius: 50%;
+}
+
+.navbar-brand {
+  transition: all 0.3s;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.1);
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+/* Buttons Styling */
+.button {
+  background-color: #7dc6b5;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 10rem;
+}
+
+.button:hover {
+  background-color: #60998c;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/* Navbar Styling */
+a.nav-item-login {
+  margin-left: 0rem;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+  transition: all 0.3s;
+}
+
+ul.navbar-nav.ml-auto {
+  margin-right: 3rem;
+  margin-top: 1.5rem;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border-radius: 3px;
+}
+
+.active-link {
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border-radius: 3px;
+  margin-left: 0px;
+}
+
+.nav-link-home {
+  display: block;
+  padding: .5rem 1rem;
+}
+
+.nav-item {
+  margin-left: 30px;
+}
+
+/* Social Media ICONS Styling */
+.fab {
+  font-size: 60px;
+  margin: 30px;  
+  color: white;
+  transition: all 0.3s;
+}
+
+.fab:hover {
+  transform: scale(1.3) rotate(25deg);
+}
+
+/* Footer Styling */
+footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 30px;
+  color: white;
+  text-align: center;
+}
+
+/* Media Queries Responsive */
+@media only screen and (max-width: 830px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .shadow-box {
+    margin-top: 3rem;
+  }
+
+  .navbar-nav .nav-link {
+    padding-right: 0;
+    padding-left: 1em;
+  }
+
+  .fab {
+    font-size: 37px;
+  }
+
+  footer {
+    position: relative;
+  }
+
+  .bg-login {
+    background-image: url("../images/WebsitePraktijkWijzerLoginMobile.png");
+  }
+}
+
+/* Iphone 5 Responsive */
+@media only screen and (max-width: 360px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  footer {
+    padding: 3px;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+}
