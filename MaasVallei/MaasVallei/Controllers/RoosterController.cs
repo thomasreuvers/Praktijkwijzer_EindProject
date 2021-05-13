@@ -40,7 +40,7 @@ namespace MaasVallei.Controllers
                 {EndShift = schedule.EndShift.ToLocalTime(),
                     StartShift = schedule.StartShift.ToLocalTime(),
                     Id = schedule.Id, User = _userService.Get(schedule.UserId),
-                    RoosterDate = schedule.RoosterDate.ToLocalTime()}));
+                RoosterDate = schedule.RoosterDate.ToLocalTime()}));
 
             return View(schedules);
         }

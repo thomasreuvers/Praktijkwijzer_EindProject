@@ -7,17 +7,19 @@
     var complaintCount = 0;
 
 
-    if (Model.Complaints.Any())
+    if (Model.Complaints != null)
     {
-        if (User.IsInRole("TECHNISCH"))
+        if (Model.Complaints.Any())
         {
-            complaintCount = Model.Complaints.Where(x => x.State == "In Behandeling").Count(x => x.Department == Departments.Technisch);
-        }else if (User.IsInRole("SCHOONMAAK"))
-        {
-            complaintCount = Model.Complaints.Where(x => x.State == "In Behandeling").Count(x => x.Department == Departments.Schoonmaak);
+            if (User.IsInRole("TECHNISCH"))
+            {
+                complaintCount = Model.Complaints.Where(x => x.State == "In Behandeling").Count(x => x.Department == Departments.Technisch);
+            }else if (User.IsInRole("SCHOONMAAK"))
+            {
+                complaintCount = Model.Complaints.Where(x => x.State == "In Behandeling").Count(x => x.Department == Departments.Schoonmaak);
+            }
         }
     }
-
 }
 
 <div class="container-fluid main">
